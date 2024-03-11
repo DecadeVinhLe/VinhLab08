@@ -12,7 +12,7 @@
     <ImageView
         android:layout_width="94dp"
         android:layout_height="85dp"
-        android:src="@drawable/aklogo" />
+        android:src="@drawable/menu_icon" />
 
     <TextView
         android:layout_width="85dp"

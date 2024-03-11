@@ -1,3 +1,5 @@
+<!--Vinh Le-->
+<!--N01518620-->
 <resources>
     <string name="app_name">VinhLab8</string>
     <string name="open_nav">Open Navigation Drawer</string>
@@ -12,4 +14,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="log_out">Log out!</string>
+    <string name="vinh_le">Vinh Le</string>
+    <string name="exit_msg">"Do you want to exit the app ? "</string>
+    <string name="no">NO\n</string>
+    <string name="yes">yes\n</string>
 </resources>

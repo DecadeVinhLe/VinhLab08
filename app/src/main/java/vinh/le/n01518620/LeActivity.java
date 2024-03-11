@@ -1,17 +1,19 @@
 package vinh.le.n01518620;
 
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Toast;
+
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.Toast;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -43,15 +45,36 @@ public class LeActivity extends AppCompatActivity implements NavigationView.OnNa
                 if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                     drawerLayout.closeDrawer(GravityCompat.START);
                 } else {
-                    LeActivity.super.onBackPressed();
+                    showExitConfirmationDialog();
                 }
             }
         };
         getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
+    private void showExitConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setIcon(R.drawable.sea); // set your custom icon
+        builder.setTitle(getString(R.string.vinh_le));
+        builder.setMessage(getString(R.string.exit_msg));
+        builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish(); // Exit the app
+            }
+        });
+        builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // Do nothing, stay in the app
+            }
+        });
+        builder.setCancelable(false); // User must not be able to dismiss without answering
+        builder.show();
+    }
+
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.nav_home) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
@@ -62,7 +85,7 @@ public class LeActivity extends AppCompatActivity implements NavigationView.OnNa
         } else if (id == R.id.nav_about) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AboutFragment()).commit();
         } else if (id == R.id.nav_logout) {
-            Toast.makeText(this, getString(R.string.log_out), Toast.LENGTH_SHORT).show();
+            showExitConfirmationDialog();
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
