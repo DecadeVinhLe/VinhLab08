@@ -35,4 +35,13 @@
     <string name="profile">Profile</string>
     <string name="current_time">Current Time (GMT):</string>
     <string name="vinh">Vinh : \\t</string>
+    <string name="error_email">Invalid input. Please check your email and ID.</string>
+    <string name="pattern">Invalid email format</string>
+    <string name="length">ID must be at least 6 digits long</string>
+    <string name="checkbox">"Checkbox: "</string>
+    <string name="checked">Checked\n</string>
+    <string name="unchecked">Unchecked\n</string>
+    <string name="no_data">No Data</string>
+    <string name="Email">"Email: "</string>
+    <string name="Id">"ID: "</string>
 </resources>

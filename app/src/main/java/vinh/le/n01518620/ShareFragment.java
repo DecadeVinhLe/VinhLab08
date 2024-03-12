@@ -59,9 +59,9 @@ public class ShareFragment extends Fragment {
         if (validateInput()) {
             // Save user info using SharedPreferences
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("checkbox", checkbox.isChecked());
-            editor.putString("email", emailEditText.getText().toString());
-            editor.putString("id", idEditText.getText().toString());
+            editor.putBoolean(getString(R.string.checkbox_label), checkbox.isChecked());
+            editor.putString(getString(R.string.email), emailEditText.getText().toString());
+            editor.putString(getString(R.string.id), idEditText.getText().toString());
             editor.apply();
 
             // Display user info in a Toast
@@ -80,14 +80,14 @@ public class ShareFragment extends Fragment {
         // Validate email format
         String email = emailEditText.getText().toString().trim();
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailEditText.setError("Invalid email format");
+            emailEditText.setError(getString(R.string.pattern));
             return false;
         }
 
         // Validate ID length
         String id = idEditText.getText().toString().trim();
         if (id.length() < 6) {
-            idEditText.setError("ID must be at least 6 digits long");
+            idEditText.setError(getString(R.string.length));
             return false;
         }
 
@@ -99,11 +99,15 @@ public class ShareFragment extends Fragment {
         String email = sharedPreferences.getString("email", "");
         String id = sharedPreferences.getString("id", "");
 
-        String userInfo = "Checkbox: " + (isChecked ? "Checked" : "Unchecked") + "\n" +
-                "Email: " + email + "\n" +
-                "ID: " + id;
+        if (isChecked || !email.isEmpty() || !id.isEmpty()) {
+            String userInfo = getString(R.string.checkbox) + (isChecked ? getString(R.string.checked) : getString(R.string.unchecked)) + "\n" +
+                    getString(R.string.Email) + (email.isEmpty() ? getString(R.string.no_data) : email) + "\n" +
+                    getString(R.string.Id) + (id.isEmpty() ? getString(R.string.no_data): id);
 
-        Toast.makeText(requireContext(), userInfo, Toast.LENGTH_LONG).show();
+            Toast.makeText(requireContext(), userInfo, Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(requireContext(), getString(R.string.no_data), Toast.LENGTH_LONG).show();
+        }
     }
 
     private void displayCurrentTime() {
