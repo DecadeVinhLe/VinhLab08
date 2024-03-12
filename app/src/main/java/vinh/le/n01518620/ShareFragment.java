@@ -110,13 +110,10 @@ public class ShareFragment extends Fragment {
         // Display current time in GMT with full name in a Toast
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss", Locale.getDefault());
         String currentTime = sdf.format(new Date());
-        String fullName = "Your Full Name"; // Replace with your full name
-        String toastMessage = "Current Time (GMT): " + currentTime + "\n" +
-                "Full Name: " + fullName;
+        String fullName = getString(R.string.vinh_le); // Replace with your full name
+        String toastMessage =getString(R.string.current_time) + currentTime + "\n" +
+               getString(R.string.vinh) + fullName;
 
         Toast.makeText(requireContext(), toastMessage, Toast.LENGTH_LONG).show();
     }
-}
-  public ShareFragment() {
-    // Required empty public constructor
 }
