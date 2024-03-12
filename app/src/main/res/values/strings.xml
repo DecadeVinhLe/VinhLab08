@@ -44,8 +44,8 @@
     <string name="no_data">No Data</string>
     <string name="Email">"Email: "</string>
     <string name="Id">"ID: "</string>
-    <string name="le">Le</string>
+    <string name="le">Le\t</string>
     <string name="lock_orientation">Lock Orientation</string>
-    <string name="vinH">Vinh</string>
+    <string name="vinH">Vinh\t</string>
     <string name="counter">Counter:\\t</string>
 </resources>

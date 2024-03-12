@@ -1,5 +1,3 @@
-//Vinh Le
-//N01518620
 package vinh.le.n01518620;
 
 import android.content.SharedPreferences;
@@ -49,7 +47,7 @@ public class AboutFragment extends Fragment {
         orientationToggleButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 // Lock screen orientation to portrait
-                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
             } else {
                 // Set to auto orientation
                 getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
@@ -72,15 +70,8 @@ public class AboutFragment extends Fragment {
         String email = sharedPreferences.getString("email", "");
         String id = sharedPreferences.getString("id", "");
 
-        if (isChecked || !email.isEmpty() || !id.isEmpty()) {
-            String userInfo = getString(R.string.checkbox) + (isChecked ? getString(R.string.checked) : getString(R.string.unchecked)) + "\n" +
-                    getString(R.string.Email) + (email.isEmpty() ? getString(R.string.no_data) : email) + "\n" +
-                    getString(R.string.Id) + (id.isEmpty() ? getString(R.string.no_data): id);
-
-            Toast.makeText(requireContext(), userInfo, Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(requireContext(), getString(R.string.no_data), Toast.LENGTH_LONG).show();
-        }
+        // Update TextViews with retrieved data
+        firstNameTextView.setText(getString(R.string.vinH) + (isChecked ? getString(R.string.checked) : getString(R.string.unchecked)));
+        lastNameTextView.setText(getString(R.string.le) + (email.isEmpty() ? getString(R.string.no_data) : email));
     }
-
 }
