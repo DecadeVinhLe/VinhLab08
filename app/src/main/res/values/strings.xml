@@ -33,4 +33,6 @@
     <string name="email">Email:</string>
     <string name="checkbox_label">Checkbox</string>
     <string name="profile">Profile</string>
+    <string name="current_time">Current Time (GMT):</string>
+    <string name="vinh">Vinh : \\t</string>
 </resources>
