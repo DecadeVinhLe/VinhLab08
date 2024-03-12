@@ -2,65 +2,121 @@
 //N01518620
 package vinh.le.n01518620;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ShareFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class ShareFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private CheckBox checkbox;
+    private EditText emailEditText, idEditText;
+    private ImageButton imageButton;
+    private SharedPreferences sharedPreferences;
 
     public ShareFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ShareFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ShareFragment newInstance(String param1, String param2) {
-        ShareFragment fragment = new ShareFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_share, container, false);
+        View view = inflater.inflate(R.layout.fragment_share, container, false);
+
+        // Initialize Views
+        checkbox = view.findViewById(R.id.checkbox);
+        emailEditText = view.findViewById(R.id.emailEditText);
+        idEditText = view.findViewById(R.id.idEditText);
+        imageButton = view.findViewById(R.id.imageButton);
+
+        // Load SharedPreferences
+        sharedPreferences = requireActivity().getSharedPreferences("UserPrefs", 0);
+
+        // Set OnClickListener for ImageButton
+        imageButton.setOnClickListener(v -> saveUserInfo());
+
+        // Display current time and user's full name in a Toast
+        displayCurrentTime();
+
+        return view;
     }
+
+    private void saveUserInfo() {
+        // Validate email and ID
+        if (validateInput()) {
+            // Save user info using SharedPreferences
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("checkbox", checkbox.isChecked());
+            editor.putString("email", emailEditText.getText().toString());
+            editor.putString("id", idEditText.getText().toString());
+            editor.apply();
+
+            // Display user info in a Toast
+            displayUserInfo();
+
+            // Clear EditText fields
+            emailEditText.getText().clear();
+            idEditText.getText().clear();
+        } else {
+            // Display error message
+            Toast.makeText(requireContext(), "Invalid input. Please check your email and ID.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean validateInput() {
+        // Validate email format
+        String email = emailEditText.getText().toString().trim();
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailEditText.setError("Invalid email format");
+            return false;
+        }
+
+        // Validate ID length
+        String id = idEditText.getText().toString().trim();
+        if (id.length() < 6) {
+            idEditText.setError("ID must be at least 6 digits long");
+            return false;
+        }
+
+        return true;
+    }
+
+    private void displayUserInfo() {
+        boolean isChecked = sharedPreferences.getBoolean("checkbox", false);
+        String email = sharedPreferences.getString("email", "");
+        String id = sharedPreferences.getString("id", "");
+
+        String userInfo = "Checkbox: " + (isChecked ? "Checked" : "Unchecked") + "\n" +
+                "Email: " + email + "\n" +
+                "ID: " + id;
+
+        Toast.makeText(requireContext(), userInfo, Toast.LENGTH_LONG).show();
+    }
+
+    private void displayCurrentTime() {
+        // Display current time in GMT with full name in a Toast
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss", Locale.getDefault());
+        String currentTime = sdf.format(new Date());
+        String fullName = "Your Full Name"; // Replace with your full name
+        String toastMessage = "Current Time (GMT): " + currentTime + "\n" +
+                "Full Name: " + fullName;
+
+        Toast.makeText(requireContext(), toastMessage, Toast.LENGTH_LONG).show();
+    }
+}
+  public ShareFragment() {
+    // Required empty public constructor
 }

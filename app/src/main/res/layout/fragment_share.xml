@@ -1,14 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShareFragment">
+    android:background="#E4BA97"
+    android:padding="16dp">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- Profile Text -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/profileText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/profile"
+        android:textColor="#B83107"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
-</FrameLayout>
+    <!-- Checkbox -->
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profileText"
+        android:textColor="#B83107"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="@string/checkbox_label" />
+
+    <!-- Email -->
+
+    <TextView
+        android:id="@+id/emailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkbox"
+        android:layout_marginTop="58dp"
+        android:text="@string/email"
+        android:textColor="#AC350F"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- ID -->
+
+    <EditText
+        android:id="@+id/emailEditText"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/emailLabel"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="-32dp"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/enter_email"
+        android:inputType="textEmailAddress" />
+
+    <!-- ImageButton -->
+
+    <TextView
+        android:id="@+id/idLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/emailEditText"
+        android:layout_marginTop="38dp"
+        android:text="@string/id"
+        android:textColor="#AC3712"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/idEditText"
+        android:layout_width="279dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/idLabel"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="-36dp"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/enter_student_id_digits_only"
+        android:inputType="number"
+        android:maxLength="10"
+        android:maxLines="1" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/idEditText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/sword" />
+
+</RelativeLayout>

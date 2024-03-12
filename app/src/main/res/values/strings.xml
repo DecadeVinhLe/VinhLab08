@@ -27,4 +27,10 @@
     <string name="denied">Permission denied\n</string>
     <string name="allow">Permission already granted</string>
     <string name="ask_permission">Please enable permission in app settings</string>
+    <string name="enter_student_id_digits_only">Enter student ID (digits only)</string>
+    <string name="id">ID:</string>
+    <string name="enter_email">Enter email</string>
+    <string name="email">Email:</string>
+    <string name="checkbox_label">Checkbox</string>
+    <string name="profile">Profile</string>
 </resources>
