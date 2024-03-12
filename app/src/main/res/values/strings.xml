@@ -25,4 +25,6 @@
     <string name="setting">Gallery\n</string>
     <string name="grant">Permission Granted</string>
     <string name="denied">Permission denied\n</string>
+    <string name="allow">Permission already granted</string>
+    <string name="ask_permission">Please enable permission in app settings</string>
 </resources>
