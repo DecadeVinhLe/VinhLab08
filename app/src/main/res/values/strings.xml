@@ -23,4 +23,6 @@
     <string name="Vinh">Vinh Le \t</string>
     <string name="access_photos">Access Photos</string>
     <string name="setting">Gallery\n</string>
+    <string name="grant">Permission Granted</string>
+    <string name="denied">Permission denied\n</string>
 </resources>

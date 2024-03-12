@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -25,6 +27,8 @@ public class SettingsFragment extends Fragment {
     private static final int REQUEST_PERMISSION_CODE = 123;
     private Button accessPhotosButton;
     private ImageView photoImageView;
+    private ActivityResultLauncher<String> requestPermissionLauncher;
+
     public SettingsFragment() {
         // Required empty public constructor
     }
@@ -36,10 +40,18 @@ public class SettingsFragment extends Fragment {
         accessPhotosButton = view.findViewById(R.id.accessPhotosButton);
         photoImageView = view.findViewById(R.id.photoImageView);
 
-        accessPhotosButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkPermissionAndAccessPhotos();
+        accessPhotosButton.setOnClickListener(v -> checkPermissionAndAccessPhotos());
+
+        requestPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+            if (isGranted) {
+                // Permission granted
+                displayToast(getString(R.string.grant));
+                // Access photos here
+                // Replace below code with your logic to access photos from device
+                photoImageView.setImageResource(R.drawable.sea);
+            } else {
+                // Permission denied
+                displayToast(getString(R.string.denied));
             }
         });
 
@@ -50,12 +62,10 @@ public class SettingsFragment extends Fragment {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                // Permission was denied once but not "never ask again" selected
-                ActivityCompat.requestPermissions(requireActivity(),
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        REQUEST_PERMISSION_CODE);
+                // Permission rationale shown before, request permission
+                requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE);
             } else {
-                // Permission was denied twice, guide user to app settings
+                // Permission rationale not shown before, direct to app settings
                 showSettingsAlertDialog();
             }
         } else {
@@ -77,24 +87,7 @@ public class SettingsFragment extends Fragment {
         startActivity(intent);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_PERMISSION_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted
-                displayToast("Permission granted");
-                // Access photos here
-                // Replace below code with your logic to access photos from device
-                photoImageView.setImageResource();
-            } else {
-                // Permission denied
-                displayToast("Permission denied");
-            }
-        }
-    }
-
     private void displayToast(String message) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
     }
 }
-
