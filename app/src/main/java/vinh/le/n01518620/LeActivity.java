@@ -56,7 +56,7 @@ public class LeActivity extends AppCompatActivity implements NavigationView.OnNa
 
     private void showExitConfirmationDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setIcon(R.drawable.sea); // set your custom icon
+        builder.setIcon(R.drawable.train); // set your custom icon
         builder.setTitle(getString(R.string.vinh_le));
         builder.setMessage(getString(R.string.exit_msg));
         builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
