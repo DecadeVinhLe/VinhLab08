@@ -26,6 +26,7 @@ public class SettingsFragment extends Fragment {
     private static final int REQUEST_PERMISSION_CODE = 123;
     private ImageView photoImageView;
     private ActivityResultLauncher<String> requestPermissionLauncher;
+    private ActivityResultLauncher<Intent> getContentLauncher;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -52,17 +53,15 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        return view;
-    }
+        getContentLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == getActivity().RESULT_OK && result.getData() != null) {
+                Uri selectedImageUri = result.getData().getData();
+                // Set the selected image to the ImageView
+                photoImageView.setImageURI(selectedImageUri);
+            }
+        });
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_PERMISSION_CODE && resultCode == getActivity().RESULT_OK && data != null) {
-            Uri selectedImageUri = data.getData();
-            // Set the selected image to the ImageView
-            photoImageView.setImageURI(selectedImageUri);
-        }
+        return view;
     }
 
     private void checkPermissionAndAccessPhotos() {
@@ -86,7 +85,7 @@ public class SettingsFragment extends Fragment {
     private void accessPhotosFromStorage() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
-        startActivityForResult(intent, REQUEST_PERMISSION_CODE);
+        getContentLauncher.launch(intent);
     }
 
     private void showSettingsAlertDialog() {
@@ -103,4 +102,3 @@ public class SettingsFragment extends Fragment {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
     }
 }
-
