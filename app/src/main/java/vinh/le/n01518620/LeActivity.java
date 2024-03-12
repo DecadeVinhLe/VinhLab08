@@ -1,9 +1,11 @@
+//Vinh Le
+//N01518620
 package vinh.le.n01518620;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -45,32 +47,34 @@ public class LeActivity extends AppCompatActivity implements NavigationView.OnNa
                 if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                     drawerLayout.closeDrawer(GravityCompat.START);
                 } else {
-                    showExitConfirmationDialog();
+                    DialogCall.showExitConfirmationDialog(LeActivity.this);
                 }
             }
         };
         getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
-    private void showExitConfirmationDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setIcon(R.drawable.sea); // set your custom icon
-        builder.setTitle(getString(R.string.vinh_le));
-        builder.setMessage(getString(R.string.exit_msg));
-        builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                finish(); // Exit the app
-            }
-        });
-        builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                // Do nothing, stay in the app
-            }
-        });
-        builder.setCancelable(false); // User must not be able to dismiss without answering
-        builder.show();
+    public static class DialogCall {
+        public static void showExitConfirmationDialog(Activity activity) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            builder.setIcon(R.drawable.sea); // set your custom icon
+            builder.setTitle(activity.getString(R.string.vinh_le));
+            builder.setMessage(activity.getString(R.string.exit_msg));
+            builder.setPositiveButton(activity.getString(R.string.yes), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    activity.finish(); // Exit the app
+                }
+            });
+            builder.setNegativeButton(activity.getString(R.string.no), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    // Do nothing, stay in the app
+                }
+            });
+            builder.setCancelable(false); // User must not be able to dismiss without answering
+            builder.show();
+        }
     }
 
     @Override
@@ -85,7 +89,7 @@ public class LeActivity extends AppCompatActivity implements NavigationView.OnNa
         } else if (id == R.id.nav_about) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AboutFragment()).commit();
         } else if (id == R.id.nav_logout) {
-            showExitConfirmationDialog();
+            DialogCall.showExitConfirmationDialog(this);
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
