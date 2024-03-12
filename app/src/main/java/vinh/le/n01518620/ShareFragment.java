@@ -95,9 +95,9 @@ public class ShareFragment extends Fragment {
     }
 
     private void displayUserInfo() {
-        boolean isChecked = sharedPreferences.getBoolean("checkbox", false);
-        String email = sharedPreferences.getString("email", "");
-        String id = sharedPreferences.getString("id", "");
+        boolean isChecked = sharedPreferences.getBoolean(getString(R.string.checkbox_label), false);
+        String email = sharedPreferences.getString(getString(R.string.email), "");
+        String id = sharedPreferences.getString(getString(R.string.id), "");
 
         if (isChecked || !email.isEmpty() || !id.isEmpty()) {
             String userInfo = getString(R.string.checkbox) + (isChecked ? getString(R.string.checked) : getString(R.string.unchecked)) + "\n" +
@@ -109,6 +109,7 @@ public class ShareFragment extends Fragment {
             Toast.makeText(requireContext(), getString(R.string.no_data), Toast.LENGTH_LONG).show();
         }
     }
+
 
     private void displayCurrentTime() {
         // Display current time in GMT with full name in a Toast
