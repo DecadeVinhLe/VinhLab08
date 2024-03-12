@@ -72,7 +72,7 @@ public class ShareFragment extends Fragment {
             idEditText.getText().clear();
         } else {
             // Display error message
-            Toast.makeText(requireContext(), "Invalid input. Please check your email and ID.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(),getString(R.string.error_email), Toast.LENGTH_SHORT).show();
         }
     }
 
