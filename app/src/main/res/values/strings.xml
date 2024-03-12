@@ -18,4 +18,6 @@
     <string name="exit_msg">"Do you want to exit the app ? "</string>
     <string name="no">NO\n</string>
     <string name="yes">yes\n</string>
+    <string name="submit">Click here !\n</string>
+    <string name="student_id">n01518620</string>
 </resources>

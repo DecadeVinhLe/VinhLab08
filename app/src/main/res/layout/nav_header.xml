@@ -6,7 +6,7 @@
     android:layout_height="176dp"
     android:gravity="bottom"
     android:padding="16dp"
-    android:background="@drawable/headerbkg"
+    android:background="@drawable/harbour"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
@@ -18,7 +18,7 @@
         android:layout_width="85dp"
         android:layout_height="wrap_content"
         android:text="@string/vinhLab08"
-        android:textColor="@color/white"
+        android:textColor="#8BCDE3"
         android:textStyle="bold" />
 
     <TextView
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="@string/n01518620_humber_ca"
-        android:textColor="@color/white"
+        android:textColor="#8FD9F1"
         android:textSize="14sp" />
 
 </LinearLayout>
