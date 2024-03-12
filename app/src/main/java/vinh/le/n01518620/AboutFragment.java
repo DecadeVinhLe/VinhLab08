@@ -2,6 +2,7 @@
 //N01518620
 package vinh.le.n01518620;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -46,7 +48,7 @@ public class AboutFragment extends Fragment {
         displayCounterAndFullName();
 
         // Load SharedPreferences
-        sharedPreferences = requireActivity().getSharedPreferences("UserData", 0);
+        sharedPreferences = requireActivity().getSharedPreferences("UserPrefs", 0);
 
         // Display data from SharedPreferences
         displayDataFromSharedPreferences();
@@ -54,7 +56,7 @@ public class AboutFragment extends Fragment {
         orientationToggleButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 // Lock screen orientation to portrait
-                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
             } else {
                 // Set to auto orientation
                 getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
@@ -73,7 +75,7 @@ public class AboutFragment extends Fragment {
     private void displayCounterAndFullName() {
         String fullName = getString(R.string.vinh_le);
         String toastMessage = getString(R.string.counter) + counter + "\n" +
-                getString(R.string.vinh)+ fullName;
+                getString(R.string.vinh) + fullName;
 
         Toast.makeText(requireContext(), toastMessage, Toast.LENGTH_SHORT).show();
 
@@ -81,13 +83,15 @@ public class AboutFragment extends Fragment {
         counter++;
     }
 
+    @SuppressLint("SetTextI18n")
     private void displayDataFromSharedPreferences() {
         boolean isChecked = sharedPreferences.getBoolean(getString(R.string.checkbox_label), true);
         String email = sharedPreferences.getString(getString(R.string.email), "");
         String id = sharedPreferences.getString(getString(R.string.id), "");
 
         // Update TextViews with retrieved data
-        firstNameTextView.setText(getString(R.string.vinH)+" " + (isChecked ? getString(R.string.checked) : getString(R.string.unchecked)));
-        lastNameTextView.setText(getString(R.string.le) + " " +(email.isEmpty() ? getString(R.string.no_data) : email));
+        firstNameTextView.setText(getString(R.string.vinH) + " " + (isChecked ? getString(R.string.checked) : getString(R.string.unchecked)));
+        lastNameTextView.setText(getString(R.string.le) + " " + (email.isEmpty() ? getString(R.string.no_data) : email));
     }
 }
+
