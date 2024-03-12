@@ -86,7 +86,7 @@ public class ShareFragment extends Fragment {
 
         // Validate ID length
         String id = idEditText.getText().toString().trim();
-        if (id.length() < 6) {
+        if (id.length() <= 6) {
             idEditText.setError(getString(R.string.length));
             return false;
         }
