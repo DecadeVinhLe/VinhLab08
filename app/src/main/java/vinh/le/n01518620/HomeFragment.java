@@ -3,27 +3,25 @@
 package vinh.le.n01518620;
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.google.android.material.snackbar.Snackbar;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 public class HomeFragment extends Fragment {
     private ImageView imageView;
     private Button button;
     private int clickCount = 1;
 
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
@@ -40,11 +38,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Rotate between 4 different images
-                int resourceId = getResources().getIdentifier("image_" + (clickCount % 4 + 1), "drawable", requireContext().getPackageName());
+                int resourceId = getResources().getIdentifier("image_" + (clickCount % 4 + 1), "drawable", requireActivity().getPackageName());
                 imageView.setImageResource(resourceId);
-
-                // Display Snackbar with click count
-                Snackbar.make(view, getString(R.string.vinh_le) + " - Click Count: " + clickCount, Snackbar.LENGTH_SHORT).show();
 
                 // Increment click count
                 clickCount++;
