@@ -3,6 +3,7 @@
 package vinh.le.n01518620;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -89,13 +90,20 @@ public class SettingsFragment extends Fragment {
     }
 
     private void showSettingsAlertDialog() {
-        // Prompt the user to go to app settings
+        // Prompt the user to go to app settings or emulator settings
         Toast.makeText(requireContext(), getString(R.string.ask_permission), Toast.LENGTH_LONG).show();
-        Intent intent = new Intent();
-        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        Uri uri = Uri.fromParts("package", requireContext().getPackageName(), null);
-        intent.setData(uri);
-        startActivity(intent);
+
+        new AlertDialog.Builder(requireContext())
+                .setMessage(getString(R.string.ask_permission))
+                .setPositiveButton("App Settings", (dialog, which) -> {
+                    Intent intent = new Intent();
+                    intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    Uri uri = Uri.fromParts("package", requireContext().getPackageName(), null);
+                    intent.setData(uri);
+                    startActivity(intent);
+                })
+
+                .show();
     }
 
     private void displayToast(String message) {
