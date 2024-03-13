@@ -74,13 +74,15 @@ public class AboutFragment extends Fragment {
 
     private void displayCounterAndFullName() {
         String fullName = getString(R.string.vinh_le);
+
+        // Increment counter
+        counter++;
+
         String toastMessage = getString(R.string.counter) + counter + "\n" +
                 getString(R.string.vinh) + fullName;
 
         Toast.makeText(requireContext(), toastMessage, Toast.LENGTH_SHORT).show();
 
-        // Increment counter
-        counter++;
     }
 
     @SuppressLint("SetTextI18n")
