@@ -22,11 +22,11 @@ public class AboutFragment extends Fragment {
     private static final String COUNTER_KEY = "counter";
     private int counter = 1;
     private SharedPreferences sharedPreferences;
-    private TextView firstNameTextView, lastNameTextView,idTextView;
+    private TextView firstNameTextView, lastNameTextView, idTextView;
     private ToggleButton orientationToggleButton;
 
     public AboutFragment() {
-        // Required empty public constructor
+        // Empty public constructor required
     }
 
     @Override
@@ -101,8 +101,7 @@ public class AboutFragment extends Fragment {
         // Update TextViews with retrieved data
         firstNameTextView.setText(getString(R.string.vinH) + " " + (isChecked ? getString(R.string.checked) : getString(R.string.unchecked)));
         lastNameTextView.setText(getString(R.string.le) + " " + (email.isEmpty() ? getString(R.string.no_data) : email));
-        idTextView.setText(getString(R.string.id)+ " " + (id.isEmpty() ? getString(R.string.no_data) : id));
+        idTextView.setText(getString(R.string.Id) + " " + (id.isEmpty() ? getString(R.string.no_data) : id));
 
     }
 }
-
