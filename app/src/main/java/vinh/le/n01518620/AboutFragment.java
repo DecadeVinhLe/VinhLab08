@@ -22,7 +22,7 @@ public class AboutFragment extends Fragment {
     private static final String COUNTER_KEY = "counter";
     private int counter = 1;
     private SharedPreferences sharedPreferences;
-    private TextView firstNameTextView, lastNameTextView;
+    private TextView firstNameTextView, lastNameTextView,idTextView;
     private ToggleButton orientationToggleButton;
 
     public AboutFragment() {
@@ -37,6 +37,7 @@ public class AboutFragment extends Fragment {
         // Initialize views
         firstNameTextView = view.findViewById(R.id.firstNameTextView);
         lastNameTextView = view.findViewById(R.id.lastNameTextView);
+        idTextView = view.findViewById(R.id.idTextView);
         orientationToggleButton = view.findViewById(R.id.orientationToggleButton);
 
         // Restore counter if it exists
@@ -100,6 +101,8 @@ public class AboutFragment extends Fragment {
         // Update TextViews with retrieved data
         firstNameTextView.setText(getString(R.string.vinH) + " " + (isChecked ? getString(R.string.checked) : getString(R.string.unchecked)));
         lastNameTextView.setText(getString(R.string.le) + " " + (email.isEmpty() ? getString(R.string.no_data) : email));
+        idTextView.setText(getString(R.string.id)+ " " + (id.isEmpty() ? getString(R.string.no_data) : id));
+
     }
 }
 

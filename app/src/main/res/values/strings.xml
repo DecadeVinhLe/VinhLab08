@@ -48,4 +48,5 @@
     <string name="lock_orientation">Lock Orientation</string>
     <string name="vinH">Vinh </string>
     <string name="counter">Counter:\t</string>
+    <string name="ID">"ID: "</string>
 </resources>
