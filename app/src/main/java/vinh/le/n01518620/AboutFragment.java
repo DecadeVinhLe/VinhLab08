@@ -73,12 +73,13 @@ public class AboutFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onPause() {
+        super.onPause();
         // Increment counter
         counter++;
         // Display counter and full name in a toast
         displayCounterAndFullName();
+
     }
 
     private void displayCounterAndFullName() {
