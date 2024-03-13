@@ -72,18 +72,23 @@ public class AboutFragment extends Fragment {
         outState.putInt(COUNTER_KEY, counter);
     }
 
-    private void displayCounterAndFullName() {
-        String fullName = getString(R.string.vinh_le);
-
+    @Override
+    public void onResume() {
+        super.onResume();
         // Increment counter
         counter++;
+        // Display counter and full name in a toast
+        displayCounterAndFullName();
+    }
 
+    private void displayCounterAndFullName() {
+        String fullName = getString(R.string.vinh_le);
         String toastMessage = getString(R.string.counter) + counter + "\n" +
                 getString(R.string.vinh) + fullName;
 
         Toast.makeText(requireContext(), toastMessage, Toast.LENGTH_SHORT).show();
-
     }
+
 
     @SuppressLint("SetTextI18n")
     private void displayDataFromSharedPreferences() {
