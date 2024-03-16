@@ -102,9 +102,11 @@ public class SettingsFragment extends Fragment {
                     intent.setData(uri);
                     startActivity(intent);
                 })
-
+                .setNegativeButton("Cancel", (dialog, which) -> {
+                })
                 .show();
     }
+
 
     private void displayToast(String message) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();

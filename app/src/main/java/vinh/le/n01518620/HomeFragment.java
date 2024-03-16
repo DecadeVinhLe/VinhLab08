@@ -71,7 +71,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void updateTextView() {
-        textView.setText(getString(R.string.Vinh)+ getString(R.string.student_id) +"Click Count: " + clickCount);
+        textView.setText(getString(R.string.Vinh)+ getString(R.string.student_id) +"\n Click Count: " + clickCount);
     }
 }
 

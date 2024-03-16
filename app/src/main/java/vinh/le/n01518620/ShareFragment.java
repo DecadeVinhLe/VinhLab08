@@ -100,8 +100,8 @@ public class ShareFragment extends Fragment {
         String id = sharedPreferences.getString(getString(R.string.id), "");
 
         if (isChecked || !email.isEmpty() || !id.isEmpty()) {
-            String userInfo = getString(R.string.checkbox) + (isChecked ? getString(R.string.checked) : getString(R.string.unchecked)) + "\n" +
-                    getString(R.string.Email) + (email.isEmpty() ? getString(R.string.no_data) : email) + "\n" +
+            String userInfo = getString(R.string.checkbox) + (isChecked ? getString(R.string.checked) : getString(R.string.unchecked)) +
+                    getString(R.string.Email) + (email.isEmpty() ? getString(R.string.no_data) : email)  +
                     getString(R.string.Id) + (id.isEmpty() ? getString(R.string.no_data): id);
 
             Toast.makeText(requireContext(), userInfo, Toast.LENGTH_LONG).show();
@@ -114,7 +114,7 @@ public class ShareFragment extends Fragment {
         // Display current time in GMT with full name in a Toast
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss", Locale.getDefault());
         String currentTime = sdf.format(new Date());
-        String fullName = getString(R.string.vinh_le); // Replace with your full name
+        String fullName = getString(R.string.vinh_le);
         String toastMessage =getString(R.string.current_time) + currentTime + "\n" +
                 getString(R.string.vinh) + fullName;
 
